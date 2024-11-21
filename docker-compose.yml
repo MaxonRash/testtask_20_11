@@ -1,0 +1,21 @@
+version: '5.0'
+
+services:
+  tasks-app:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - tasks-db
+  tasks-db:
+    image: postgres
+    restart: always
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    ports:
+      - "5430:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tasks_db
