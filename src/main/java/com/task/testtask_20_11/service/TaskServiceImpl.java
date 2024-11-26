@@ -22,6 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service for working with {@link Task} from DB
+ */
 @Service
 @Slf4j
 @Transactional(readOnly = true)
@@ -30,6 +33,13 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final CommentService commentService;
     private final UserService userService;
+
+    /**
+     * Find all tasks by {@link Pageable}
+     *
+     * @param  pageable  {@link Pageable} object
+     * @return Page of {@link TaskDTO}
+     */
     @Override
     public Page<TaskDTO> findAllTasksByPage(Pageable pageable) {
         Page<Task> tasks = taskRepository.findAll(pageable);
@@ -39,6 +49,13 @@ public class TaskServiceImpl implements TaskService {
         return dtoPage;
     }
 
+    /**
+     * Find all tasks by {@link Pageable} and email string of the author of a task
+     *
+     * @param  pageable  {@link Pageable} object
+     * @param  authorEmail  email
+     * @return Page of {@link TaskDTO}
+     */
     @Override
     public Page<TaskDTO> findAllTasksByPageByAuthor(Pageable pageable, String authorEmail) {
         Page<Task> tasks = taskRepository.findTasksByAuthor_Email(pageable, authorEmail);
@@ -47,6 +64,14 @@ public class TaskServiceImpl implements TaskService {
         PageImpl<TaskDTO> dtoPage = new PageImpl<>(taskList, pageable, tasks.getTotalElements());
         return dtoPage;
     }
+
+    /**
+     * Find all tasks by {@link Pageable} and string of the implementer email of a task
+     *
+     * @param  pageable  {@link Pageable} object
+     * @param  implementerEmail  email
+     * @return Page of {@link TaskDTO}
+     */
     @Override
     public Page<TaskDTO> findAllTasksByPageByImplementer(Pageable pageable, String implementerEmail) {
         User user = userService.getByEmail(implementerEmail);
@@ -57,6 +82,14 @@ public class TaskServiceImpl implements TaskService {
         return dtoPage;
     }
 
+    /**
+     * Find all tasks by {@link Pageable} and both string of the implementer email and an author email of a task
+     *
+     * @param  pageable  {@link Pageable} object
+     * @param  authorEmail  email
+     * @param  implementerEmail  email
+     * @return Page of {@link TaskDTO}
+     */
     @Override
     public Page<TaskDTO> findAllTasksByPageByAuthorAndByImplementer(Pageable pageable, String authorEmail, String implementerEmail) {
         User implementerFromDB = userService.getByEmail(implementerEmail);
@@ -67,12 +100,26 @@ public class TaskServiceImpl implements TaskService {
         return dtoPage;
     }
 
+    /**
+     * Find {@link Task} by id or throw {@link TaskNotFoundException}
+     *
+     * @param  id  id of the task
+     * @return {@link TaskDTO}
+     * @throws TaskNotFoundException if task is not found in DB
+     */
     @Override
     public TaskDTO findById(Long id) {
         Task task = taskRepository.findById(id).orElseThrow(TaskNotFoundException::new);
         return TaskDTO.TaskToTaskDTOConverter(task);
     }
 
+    /**
+     * Create new {@link Task} with List<> of {@link Comment} or without it
+     *
+     * @param  task  {@link Task}
+     * @param  comments  List<> of {@link Task}
+     * @return {@link TaskDTO}
+     */
     @Override
     @Transactional
     public TaskDTO createTask(Task task, List<Comment> comments) {
@@ -84,6 +131,14 @@ public class TaskServiceImpl implements TaskService {
         return taskDTO;
     }
 
+    /**
+     * Update {@link Task} with specified id. Made to be used by users having any {@link Role}
+     *
+     * @param  taskUpdateForUsersDTO  {@link TaskUpdateForUsersDTO}
+     * @param  id  id of the {@link Task}
+     * @return {@link TaskDTO}
+     * @throws TaskNotFoundException if task is not found in DB
+     */
     @Override
     @Transactional
     public TaskDTO updateTaskForUsers(TaskUpdateForUsersDTO taskUpdateForUsersDTO, Long id) {
@@ -113,6 +168,14 @@ public class TaskServiceImpl implements TaskService {
         return TaskDTO.TaskToTaskDTOConverter(updatedTaskFromDB);
     }
 
+    /**
+     * Update {@link Task} with specified id. Made to be used only by users having {@link Role} ROLE_ADMIN
+     *
+     * @param  taskToUpdate  {@link Task}
+     * @param  id  id of the {@link Task}
+     * @return {@link TaskDTO}
+     * @throws TaskNotFoundException if task is not found in DB
+     */
     @Override
     @Transactional
     public TaskDTO updateTaskForAdmins(Task taskToUpdate, Long id) {
@@ -155,6 +218,11 @@ public class TaskServiceImpl implements TaskService {
         return taskToReturn;
     }
 
+    /**
+     * Delete {@link Task} with specified id
+     *
+     * @param  id  id of the {@link Task}
+     */
     @Override
     @Transactional
     public void deleteTask(Long id) {
