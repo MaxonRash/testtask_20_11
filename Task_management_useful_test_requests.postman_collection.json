@@ -1,0 +1,355 @@
+{
+	"info": {
+		"_postman_id": "173c3265-e930-4763-8ff6-03e21448320f",
+		"name": "Task_management_useful_test_requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/tasks?page=0&size=10&sort=createdAt,desc",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOjEsImVtYWlsIjoibWF4QG1haWwucnUiLCJzdWIiOiJtYXhAbWFpbC5ydSIsImlhdCI6MTczMjYwOTQ2NSwiZXhwIjoxNzMzODE5MDY1fQ.54g2BJ3zVOSuuTy7AI88A15ItG38eGerYw36iw2U8zU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks?page=0&size=10&sort=createdAt,desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "sort",
+							"value": "createdAt,desc"
+						}
+					]
+				},
+				"description": "get all tasks by page 0, with size 10, sorted by task creation time descending"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/auth/register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"max@mail.ru\",\r\n  \"password\": \"my_password132\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"register"
+					]
+				},
+				"description": "Registration of first user"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/auth/register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"max2@mail.ru\",\r\n  \"password\": \"my_password132\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"register"
+					]
+				},
+				"description": "Registration of second user"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/tasks/get-admin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOjEsImVtYWlsIjoibWF4QG1haWwucnUiLCJzdWIiOiJtYXhAbWFpbC5ydSIsImlhdCI6MTczMjYwOTQ2NSwiZXhwIjoxNzMzODE5MDY1fQ.54g2BJ3zVOSuuTy7AI88A15ItG38eGerYw36iw2U8zU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks/get-admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks",
+						"get-admin"
+					]
+				},
+				"description": "Grant ADMIN_ROLE to user max@mail.ru"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/tasks/admin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOjEsImVtYWlsIjoibWF4QG1haWwucnUiLCJzdWIiOiJtYXhAbWFpbC5ydSIsImlhdCI6MTczMjYwOTQ2NSwiZXhwIjoxNzMzODE5MDY1fQ.54g2BJ3zVOSuuTy7AI88A15ItG38eGerYw36iw2U8zU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"heading\": \"Make a new button\",\r\n  \"description\": \"Need to make a new button to redirect to main page...\",\r\n  \"priority\": \"LOW\",\r\n    \"comments\": [\r\n    {\r\n      \"text\": \"This task should be done in 2 days - comment1\"\r\n    },\r\n    {\r\n      \"text\": \"This task should be done in 2 days - comment2\"\r\n    }\r\n  ],\r\n    \"implementers\": [\r\n    {\r\n      \"email\": \"max@mail.ru\"\r\n    },\r\n    {\r\n      \"email\": \"max2@mail.ru\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tasks/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks",
+						"admin"
+					]
+				},
+				"description": "Create task by user max@mail.ru (if admin granted)"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/tasks/admin/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOjEsImVtYWlsIjoibWF4QG1haWwucnUiLCJzdWIiOiJtYXhAbWFpbC5ydSIsImlhdCI6MTczMjYwOTQ2NSwiZXhwIjoxNzMzODE5MDY1fQ.54g2BJ3zVOSuuTy7AI88A15ItG38eGerYw36iw2U8zU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"heading\": \"A new heading\",\r\n  \"description\": \"Need to make a new button to redirect to main page... - new description\",\r\n  \"status\": \"DONE\",\r\n  \"priority\": \"HIGH\",\r\n  \"comments\": [\r\n    {\r\n      \"text\": \"This task should be done in 2 days - new comment from admin\"\r\n    }\r\n  ],\r\n  \"implementers\": [\r\n    {\r\n      \"email\": \"max2@mail.ru\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tasks/admin/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks",
+						"admin",
+						"1"
+					]
+				},
+				"description": "Updating task by admin"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/tasks/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOjEsImVtYWlsIjoibWF4QG1haWwucnUiLCJzdWIiOiJtYXhAbWFpbC5ydSIsImlhdCI6MTczMjYwOTQ2NSwiZXhwIjoxNzMzODE5MDY1fQ.54g2BJ3zVOSuuTy7AI88A15ItG38eGerYw36iw2U8zU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"status\":\"IN_PROGRESS\",\r\n  \"comments\": [\r\n      {\r\n          \"text\":\"new comment: starting the task\"\r\n      }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tasks/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks",
+						"1"
+					]
+				},
+				"description": "Updating task as user (if implementer) or admin"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/tasks/admin/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOjEsImVtYWlsIjoibWF4QG1haWwucnUiLCJzdWIiOiJtYXhAbWFpbC5ydSIsImlhdCI6MTczMjYwOTQ2NSwiZXhwIjoxNzMzODE5MDY1fQ.54g2BJ3zVOSuuTy7AI88A15ItG38eGerYw36iw2U8zU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks/admin/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks",
+						"admin",
+						"1"
+					]
+				},
+				"description": "Delete task by admin"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/tasks?page=0&size=10&sort=createdAt,desc&implementer=max2@mail.ru&author=max@mail.ru",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiUk9MRV9VU0VSIiwiaWQiOjEsImVtYWlsIjoibWF4QG1haWwucnUiLCJzdWIiOiJtYXhAbWFpbC5ydSIsImlhdCI6MTczMjM2NjA4OSwiZXhwIjoxNzMzNTc1Njg5fQ.Ox5FT3vnr2Dt6vTQlLh3bkAeOqvuLpzWRUDl1PuDnvc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tasks?page=0&size=10&sort=createdAt,desc&implementer=max2@mail.ru&author=max@mail.ru",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "sort",
+							"value": "createdAt,desc"
+						},
+						{
+							"key": "implementer",
+							"value": "max2@mail.ru"
+						},
+						{
+							"key": "author",
+							"value": "max@mail.ru"
+						}
+					]
+				},
+				"description": "Get all tasks paged where author is max@mail.ru and implementer is max2@mail.ru"
+			},
+			"response": []
+		}
+	]
+}
