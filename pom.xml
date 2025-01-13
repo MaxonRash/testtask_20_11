@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.task</groupId>
-    <artifactId>testtask_20_11</artifactId>
+    <artifactId>task_management_api_with_jwt</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>testtask_20_11</name>
-    <description>testtask_20_11</description>
+    <name>task_management_api_with_jwt</name>
+    <description>task_management_api_with_jwt</description>
     <url/>
     <licenses>
         <license/>
